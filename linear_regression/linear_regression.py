@@ -20,7 +20,7 @@ class LinearRegression():
         
     def cost(self):
         c = 1/(2*self.m) * (self.x @ self.w - self.y)**2
-        regC = c + 1/(2*self.m) * self.reg_lambda * self.w.transpose() @ self.w
+        regC = c + 1/(2*self.m) * self.reg_lambda * self.w.transpose() @ self.w**2
         return sum(regC)
     
     def update(self):
