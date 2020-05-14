@@ -7,7 +7,7 @@ Created on Thu May 14 18:50:03 2020
 
 
 from sklearn.datasets import make_regression
-from sklearn.linear_model import Lasso
+from sklearn.linear_model import LinearRegression as LR
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
@@ -20,7 +20,7 @@ lin = lr.LinearRegression(x_tr, y_tr, max_iter=1000, reg_lambda=0)
 lin.fit()
 loss = lin.costs
 
-sk = Lasso(max_iter=1000)
+sk = LR()
 sk.fit(x_tr, y_tr)
 
 mae1 = mean_absolute_error(y_te, lin.predict(x_te))
