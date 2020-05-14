@@ -12,7 +12,7 @@ class LinearRegression():
         x = np.array(x)
         self.m = len(y)
         self.x = np.c_[np.ones((self.m, 1)), x]
-        self.y = np.array(y)
+        self.y = np.array(y).reshape(self.m, 1)
         self.reg_lambda = reg_lambda
         self.iter = max_iter
         self.lr = learning_rate
@@ -25,12 +25,24 @@ class LinearRegression():
     
     def update(self):
         pred = self.x @ self.w
-        grad0 = self.lr * 1/self.m * sum(pred - self.y)*self.w[0]
-        grad1 = self.lr * 1/self.m * sum(pred - self.y)*self.w[1:]
-        self.w[0] = self.w[0] - grad0
-        self.w[1:] = self.w[1:]*(1 - self.lr * self.reg_lambda/self.m) - grad1
+        grad0 = 1/self.m * (self.x[:, 0].transpose() @ (pred - self.y))
+        grad1 = 1/self.m * (self.x[:, 1:].transpose() @ (pred - self.y))
+        self.w[0] = self.w[0] - self.lr * grad0
+        self.w[1:] = self.w[1:]*(1 - self.lr * self.reg_lambda/self.m) - self.lr * grad1
+        
+    def fit(self):
+        self.costs = []
+        for i in range(self.iter):
+            self.costs.append(self.cost()[0])
+            self.update()
+        return f'Final cost {self.costs[-1]}'
+    
+    def predict(self, x):
+        x = np.array(x)
+        x = np.c_[np.ones((x.shape[0])), x]
+        return x @ self.w
 
-if __name__=='__main__':
-    x = np.random.normal(size=(500, 5))
-    y = np.random.normal(size=(500,1))
-    lin = LinearRegression(x, y)
+
+    
+    
+    
