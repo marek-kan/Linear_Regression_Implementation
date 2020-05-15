@@ -16,8 +16,8 @@ from linear_regression import linear_regression as lr
 
 x, y = make_regression(n_samples = 1500, n_features=20, n_informative=6)
 x_tr, x_te, y_tr, y_te = train_test_split(x, y, test_size=0.1, random_state=5, shuffle=True)
-lin = lr.LinearRegression(x_tr, y_tr, max_iter=1000, reg_lambda=0)
-lin.fit()
+lin = lr.LinearRegression(max_iter=1000, reg_lambda=0)
+lin.fit(x_tr, y_tr)
 loss = lin.costs
 
 sk = LR()
