@@ -41,7 +41,24 @@ class LinearRegression():
         for i in range(self.iter):
             self.update(x, y, m)
             self.costs.append(self.cost(x, y, m)[0])
-        return f'Final cost {self.costs[-1]}'
+        return print(f'Final cost {self.costs[-1]}')
+    
+    def fit_sample(self, x, y, iterations=1):
+        """
+        Intended usage: During online learning when model is initialized by .fit()
+        and .fit_sample() used in online production.
+        """
+        x = np.array(x)
+        try:
+            m = len(y)
+        except:
+            m = 1
+        x = np.c_[np.ones((m, 1)), x]
+        y = np.array(y).reshape(m, 1)
+        for i in range(iterations):
+            self.update(x, y, m)
+            self.costs.append(self.cost(x, y, m)[0])
+        return print(f'Last loss: {self.costs[-2]}; New loss: {self.costs[-1]}')
        
     def predict(self, x):
         x = np.array(x)
