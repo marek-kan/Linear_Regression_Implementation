@@ -27,4 +27,11 @@ mae1 = mean_absolute_error(y_te, lin.predict(x_te))
 mae2 = mean_absolute_error(y_te, sk.predict(x_te))
 
 plt.plot(range(len(loss)), loss)
+
+# Test "online learning"
+new_examples = 5
+online_mae = []
+for i in range(new_examples):
+    lin.fit_sample(x_te[i, :].reshape(1, x.shape[1]), y_te[i])
+    online_mae.append(mean_absolute_error(y_te[i+1:], lin.predict(x_te[i+1:, :])))
     
