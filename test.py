@@ -22,7 +22,7 @@ x_tr, x_te, y_tr, y_te = train_test_split(x, y, test_size=0.1, random_state=5, s
 x_tr = scaler.fit_transform(x_tr)
 x_te = scaler.transform(x_te)
 
-lin = lr.LinearRegression(max_iter=5000, learning_rate=0.01, reg_lambda=0, beta=0.75)
+lin = lr.LinearRegression(max_iter=5000, learning_rate=0.01, reg_lambda=5e-5, beta=0.6)
 lin.fit(x_tr, y_tr)
 loss = lin.costs
 
