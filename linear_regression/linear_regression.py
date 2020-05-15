@@ -15,14 +15,14 @@ class LinearRegression():
         self.b = beta
         
     def cost(self, x, y, m):
-        c = 1/(2*m) * (x @ self.w - y)**2
-        regC = c + 1/(2*m) * self.reg_lambda * self.w.T @ self.w**2
+        c = 1/(2*m) * (np.dot(x, self.w) - y)**2
+        regC = c + 1/(2*m) * self.reg_lambda * np.dot(self.w.T, self.w**2)
         return sum(regC)
     
     def update(self, x, y, m):
-        pred = x @ self.w
-        grad0 = 1/m * (x[:, 0].T @ (pred - y))
-        grad1 = 1/m * (x[:, 1:].T @ (pred - y))
+        pred = np.dot(x, self.w)
+        grad0 = 1/m * (np.dot(x[:, 0].T, (pred - y)))
+        grad1 = 1/m * (np.dot(x[:, 1:].T, (pred - y)))
         # compute accelerations for bias and coefficients
         self.v[0] = self.b*self.v[0] + (1-self.b)*grad0
         self.v[1:] = self.b*self.v[1:] + (1-self.b)*grad1
@@ -41,7 +41,7 @@ class LinearRegression():
         for i in range(self.iter):
             self.update(x, y, m)
             self.costs.append(self.cost(x, y, m)[0])
-        return print(f'Final cost {self.costs[-1]}')
+        return print(f'Final loss {self.costs[-1]}')
     
     def fit_sample(self, x, y, iterations=1):
         """
@@ -62,7 +62,7 @@ class LinearRegression():
     def predict(self, x):
         x = np.array(x)
         x = np.c_[np.ones((x.shape[0])), x]
-        return x @ self.w
+        return np.dot(x, self.w)
 
 
     
