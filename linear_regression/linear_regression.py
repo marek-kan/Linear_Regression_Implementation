@@ -45,8 +45,7 @@ class LinearRegression():
     
     def fit_sample(self, x, y, iterations=1):
         """
-        Intended usage: During online learning when model is initialized by .fit()
-        and .fit_sample() used in online production.
+        Intended usage: During online learning after model is initialized by .fit().
         """
         x = np.array(x)
         try:
