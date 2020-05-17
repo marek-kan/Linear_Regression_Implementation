@@ -107,10 +107,10 @@ class LinearRegression():
         #adjusted R^2, True because I added ones before
         if not training:
             # only return adjusted R^2 on test set
-            adj_score = (1-(1-self.r2(x, y, True))*(x.shape[0]-1)/(x.shape[0]-x.shape[1]-1))
-            return adj_score
+            adj_r2 = (1-(1-self.r2(x, y, True))*(x.shape[0]-1)/(x.shape[0]-x.shape[1]-1))
+            return adj_r2
         else:
-            self.adj_score = (1-(1-self.r2(x, y, True))*(x.shape[0]-1)/(x.shape[0]-x.shape[1]-1))
+            self.adj_r2 = (1-(1-self.r2(x, y, True))*(x.shape[0]-1)/(x.shape[0]-x.shape[1]-1))
         
 
 
