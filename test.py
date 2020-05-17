@@ -14,7 +14,7 @@ from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 
 from linear_regression import linear_regression as lr
-
+    
 x, y = load_boston(return_X_y=True)
 scaler = StandardScaler()
 
@@ -47,3 +47,8 @@ for i in range(new_examples):
 plt.plot(range(len(online_mae)), online_mae)
 plt.title('MAE after online learning')
 plt.show()
+
+p_vals = lin.p_values
+adj_r2 = lin.calculate_stat(x_te, y_te)
+print(f'Adjusted R^2 on train set: {lin.adj_r2}; Adjusted R^2 on test set: {adj_r2}')
+r2 = lin.r2(x_te, y_te) # normal R^2 on test set
