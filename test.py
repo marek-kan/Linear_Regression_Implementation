@@ -7,7 +7,7 @@ Created on Thu May 14 18:50:03 2020
 
 
 from sklearn.datasets import load_boston
-from sklearn.linear_model import Lasso
+from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -26,7 +26,7 @@ lin = lr.LinearRegression(max_iter=5000, learning_rate=0.01, reg_lambda=5e-5, be
 lin.fit(x_tr, y_tr)
 loss = lin.costs
 
-sk = Lasso(max_iter=5000, alpha=5e-5)
+sk = Ridge(max_iter=5000, alpha=5e-5)
 sk.fit(x_tr, y_tr)
 
 mae1 = mean_absolute_error(y_te, lin.predict(x_te))
