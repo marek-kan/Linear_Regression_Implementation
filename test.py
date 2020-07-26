@@ -22,11 +22,11 @@ x_tr, x_te, y_tr, y_te = train_test_split(x, y, test_size=0.1, random_state=5, s
 x_tr = scaler.fit_transform(x_tr)
 x_te = scaler.transform(x_te)
 
-lin = lr.LinearRegression(max_iter=5000, learning_rate=0.01, reg_lambda=5e-5, beta=0.6)
-lin.fit(x_tr, y_tr)
+lin = lr.LinearRegression(max_iter=5000, learning_rate=0.01, reg_lambda=3.5, beta=0.9)
+lin.fit(x_tr, y_tr, batch_size=256)
 loss = lin.costs
 
-sk = Ridge(max_iter=5000, alpha=5e-5)
+sk = Ridge(max_iter=5000, alpha=3.5)
 sk.fit(x_tr, y_tr)
 
 mae1 = mean_absolute_error(y_te, lin.predict(x_te))
